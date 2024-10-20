@@ -5,6 +5,8 @@ Very simple PHP scripts with zero or minimal setup - just upload to webhost and 
 
 ### Blog features:
 
+- Remember to edit user/password info in the blog/index.php file at the top
+
 - Uses sqlite
 
 - Drag n drop upload of files
