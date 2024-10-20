@@ -1,4 +1,31 @@
 # No setup PHP programs for blogging, gallery and calendar
+### Screenshots below
+
+Very simple PHP scripts with zero or minimal setup - just upload to webhost and blog/share photos
+Blog features:
+
+- Uses sqlite
+
+- Drag n drop upload of files
+
+- Posts and static pages
+
+Gallery features:
+
+- All images organized through FTP
+
+- Single file gallery
+
+- Just upload and add folders via FTP
+
+- Automatically creates thumbnails
+
+- Doesn't modify directory structure
+
+Calendar features:
+
+- Calendar is still a work in progress and is not as zero setup as you need to rename all files manually.
+
 
 ## PHP Single File Gallery
 Simple gallery with no dependencies
