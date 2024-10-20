@@ -2,7 +2,8 @@
 ### Screenshots below
 
 Very simple PHP scripts with zero or minimal setup - just upload to webhost and blog/share photos
-Blog features:
+
+### Blog features:
 
 - Uses sqlite
 
@@ -10,7 +11,7 @@ Blog features:
 
 - Posts and static pages
 
-Gallery features:
+### Gallery features:
 
 - All images organized through FTP
 
