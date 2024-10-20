@@ -2,6 +2,8 @@
 
 ## PHP Single File Gallery
 Simple gallery with no dependencies
+Just upload to web host and add folders with images in them
+Automatic thumbnail creation
 Sorting / uploading via file system
 
 Preview 1:
