@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<Title>Second Sight</title>
-
-
+<Title>Requiem Blog</title>
+<link rel="stylesheet" href="style.css">
+<body>
 <?php
 session_start();
 
@@ -109,7 +109,7 @@ var myDropzone = new Dropzone("#my-dropzone", {
 });
 </script>
 <button id="wrapButtonlink">Link</button><button id="wrapButtonred">Red text</button><button id="wrapButtonblue">Blue text</button><button id="wrapButtongreen">Green text</button>
-<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button>
+<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button><button id="wrapButtonimg">IMG</button><button id="wrapButtonbold">Bold</button><button id="wrapButtonitalic">Italic</button>
             <form method="post" action="?action=add">
                 Title: <input type="text" name="title"><br><br>
                 Content:<br>
@@ -158,7 +158,7 @@ var myDropzone = new Dropzone("#my-dropzone", {
             ?>
             <h2>Edit Post</h2>
 <button id="wrapButtonlink">Link</button><button id="wrapButtonred">Red text</button><button id="wrapButtonblue">Blue text</button><button id="wrapButtongreen">Green text</button>
-<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button>
+<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button><button id="wrapButtonimg">IMG</button><button id="wrapButtonbold">Bold</button><button id="wrapButtonitalic">Italic</button>
             <form method="post" action="?action=edit&id=<?php echo $id; ?>">
                 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($post['title']); ?>"><br><br>
                 Content:<br>
@@ -218,7 +218,7 @@ var myDropzone = new Dropzone("#my-dropzone", {
             ?>
             <h2>Add Page</h2>
 <button id="wrapButtonlink">Link</button><button id="wrapButtonred">Red text</button><button id="wrapButtonblue">Blue text</button><button id="wrapButtongreen">Green text</button>
-<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button>
+<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button><button id="wrapButtonimg">IMG</button><button id="wrapButtonbold">Bold</button><button id="wrapButtonitalic">Italic</button>
             <form method="post" action="?action=add_page">
                 Title: <input type="text" name="title"><br><br>
                 Content:<br>
@@ -264,7 +264,7 @@ var myDropzone = new Dropzone("#my-dropzone", {
             ?>
             <h2>Edit Page</h2>
 <button id="wrapButtonlink">Link</button><button id="wrapButtonred">Red text</button><button id="wrapButtonblue">Blue text</button><button id="wrapButtongreen">Green text</button>
-<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button>
+<button id="wrapButtonh1">H1</button><button id="wrapButtonh2">H2</button><button id="wrapButtonh3">H3</button><button id="wrapButtonimg">IMG</button><button id="wrapButtonbold">Bold</button><button id="wrapButtonitalic">Italic</button>
             <form method="post" action="?action=edit_page&id=<?php echo $id; ?>">
                 Title: <input type="text" name="title" value="<?php echo htmlspecialchars($page['title']); ?>"><br><br>
                 Content:<br>
@@ -414,9 +414,9 @@ case 'view_post':
         <?php
        foreach ($posts as $post) {
             echo '<div class="post">';
-            echo '<h2><a href=?action=view_post&id='.$post['id'].'><div style="color:red;">' . $post['title'] . '</div></a></h2>';
-            echo '<a href=?action=view_post&id='.$post['id'].'><div style="color:brown;">' . $post['created_at'] . '</div></a>';
-            echo $post['content'];
+            echo '<div class="title"><a href=?action=view_post&id='.$post['id'].'>' . $post['title'] . '</a></div>';
+            echo '<div class="time"><a href=?action=view_post&id='.$post['id'].'>' . $post['created_at'] . '</a></div>';
+            echo '<div class="post">' . $post['content'] . '</div>';
             echo '</div>';
             if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value) {
                 echo "
@@ -632,3 +632,85 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var textarea = document.getElementById('bodytext');
+    var button = document.getElementById('wrapButtonimg');
+
+    button.addEventListener('click', function() {
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        var selectedText = textarea.value.substring(start, end);
+
+        var beforeText = '<img width=500 src="';
+        var afterText = '" />';
+
+        var newText = beforeText + selectedText + afterText;
+
+        textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+
+        var cursorPosition = start + newText.length;
+        textarea.selectionStart = textarea.selectionEnd = cursorPosition;
+
+        textarea.focus();
+    });
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var textarea = document.getElementById('bodytext');
+    var button = document.getElementById('wrapButtonbold');
+
+    button.addEventListener('click', function() {
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        var selectedText = textarea.value.substring(start, end);
+
+        var beforeText = '<b>';
+        var afterText = '</b>';
+
+        var newText = beforeText + selectedText + afterText;
+
+        textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+
+        var cursorPosition = start + newText.length;
+        textarea.selectionStart = textarea.selectionEnd = cursorPosition;
+
+        textarea.focus();
+    });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var textarea = document.getElementById('bodytext');
+    var button = document.getElementById('wrapButtonitalic');
+
+    button.addEventListener('click', function() {
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        var selectedText = textarea.value.substring(start, end);
+
+        var beforeText = '<i>';
+        var afterText = '</i>';
+
+        var newText = beforeText + selectedText + afterText;
+
+        textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+
+        var cursorPosition = start + newText.length;
+        textarea.selectionStart = textarea.selectionEnd = cursorPosition;
+
+        textarea.focus();
+    });
+});
+</script>
+
+</body>
+</html>
