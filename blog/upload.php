@@ -11,7 +11,7 @@ if (!empty($_FILES['file'])) {
     $fileName = $_FILES['file']['name'];
     $fileParts = pathinfo($fileName);
 
-    $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+    $allowedTypes = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'zip', 'rar', 'psd', 'pdf');
 
     if (in_array(strtolower($fileParts['extension']), $allowedTypes)) {
         $targetFile = $targetDir . $fileName;
