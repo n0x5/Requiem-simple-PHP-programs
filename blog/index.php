@@ -5,8 +5,7 @@
 <?php
 session_start();
 
-define('USERNAME', 'admin');
-define('PASSWORD', 'password');
+require 'login.php';
 
 $db = new PDO('sqlite:posts.db');
 

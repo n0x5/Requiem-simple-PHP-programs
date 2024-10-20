@@ -1,4 +1,7 @@
 <?php
+session_start();
+require 'login.php';
+
 if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value):
 $targetDir = "uploads/";
 
