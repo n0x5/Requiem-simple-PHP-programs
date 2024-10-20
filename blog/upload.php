@@ -1,5 +1,5 @@
 <?php
-
+if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value):
 $targetDir = "uploads/";
 
 if (!file_exists($targetDir)) {
@@ -30,4 +30,5 @@ if (!empty($_FILES['file'])) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "No file uploaded."]);
 }
+endif;
 ?>
