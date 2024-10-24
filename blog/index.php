@@ -364,7 +364,7 @@ case 'view_post':
             <?php foreach ($pages as $page): ?>
                 <li>
                     <a href="?action=view_page&id=<?php echo $page['id']; ?>"><?php echo htmlspecialchars($page['title']); ?></a>
-                    <?php if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value): ?>
+                    <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
                         - <a href="?action=edit_page&id=<?php echo $page['id']; ?>">Edit</a>
                         | <a href="?action=delete_page&id=<?php echo $page['id']; ?>">Delete</a>
                     <?php endif; ?>
