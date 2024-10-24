@@ -1,5 +1,7 @@
 <?php
+
 define('USERNAME', 'admin');
 define('PASSWORD', 'password');
-$expected_auth_value = md5(USERNAME.PASSWORD);
+define('PASSWORD_HASH', password_hash(PASSWORD, PASSWORD_BCRYPT));
 ?>
+

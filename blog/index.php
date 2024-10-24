@@ -28,9 +28,9 @@ $db->exec("CREATE TABLE IF NOT EXISTS pages (
 $action = isset($_GET['action']) ? $_GET['action'] : 'view';
 
 $protected_actions = ['add', 'edit', 'delete', 'logout', 'add_page', 'edit_page', 'delete_page'];
-$expected_auth_value = md5(USERNAME.PASSWORD);
+
 if (in_array($action, $protected_actions)) {
-    if (!isset($_COOKIE['auth']) || $_COOKIE['auth'] !== $expected_auth_value) {
+    if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
         $action = 'login';
     }
 }
@@ -40,8 +40,8 @@ switch($action) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = isset($_POST['username']) ? $_POST['username'] : '';
             $password = isset($_POST['password']) ? $_POST['password'] : '';
-            if ($username === USERNAME && $password === PASSWORD) {
-                setcookie('auth', md5(USERNAME.PASSWORD), time() + (86400 * 7), "/"); 
+            if ($username === USERNAME && password_verify($password, PASSWORD_HASH)) {
+                $_SESSION['auth'] = true;
                 header("Location: ?action=view");
                 exit;
             } else {
@@ -59,7 +59,8 @@ switch($action) {
         break;
 
     case 'logout':
-        setcookie('auth', '', time() - 3600, "/");
+        session_unset();
+        session_destroy();
         header("Location: ?action=view");
         exit;
         break;
@@ -396,7 +397,7 @@ case 'view_post':
         ?>
      <a href="/">Home</a>    
     <h2>Blog Posts</h2>
-        <?php if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value): ?>
+        <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <a href="/blog">Home</a> |
             <a href="?action=add">Add New Post</a> | 
             <a href="?action=view_pages">Manage Pages</a> | 
@@ -417,13 +418,13 @@ case 'view_post':
             echo '<div class="time"><a href=?action=view_post&id='.$post['id'].'>' . $post['created_at'] . '</a></div>';
             echo '<div class="post">' . $post['content'] . '</div>';
             echo '</div>';
-            if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value) {
+           if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
                 echo "
                     <a href='?action=edit&id=".$post['id']."'>Edit</a> | 
                     <a href='?action=delete&id=".$post['id']."'>Delete</a>
                     ";
             }
-echo '<hr>';
+            echo '<hr>';
         }
 
         echo "<div style='margin-top: 20px;'>";

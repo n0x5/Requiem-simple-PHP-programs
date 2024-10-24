@@ -2,7 +2,7 @@
 session_start();
 require 'login.php';
 
-if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value):
+if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
 $targetDir = "uploads/";
 
 if (!file_exists($targetDir)) {
@@ -33,5 +33,8 @@ if (!empty($_FILES['file'])) {
     http_response_code(400);
     echo json_encode(["status" => "error", "message" => "No file uploaded."]);
 }
-endif;
+}
+else {
+echo "access denied";
+}
 ?>
