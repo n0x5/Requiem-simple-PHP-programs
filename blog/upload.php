@@ -2,7 +2,7 @@
 session_start();
 require 'login.php';
 
-if (!isset($_SESSION['auth']) || $_SESSION['auth'] === true) {
+if (isset($_SESSION['auth']) || $_SESSION['auth'] === true) {
 $targetDir = "uploads/";
 
 if (!file_exists($targetDir)) {
