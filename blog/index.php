@@ -354,7 +354,7 @@ case 'view_post':
         ?>
         <a href="/blog">Home</a>
         <h2>Pages</h2>
-        <?php if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value): ?>
+        <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <a href="?action=add_page">Add New Page</a> | 
             <a href="?action=logout">Logout</a>
         <?php else: ?>
@@ -407,7 +407,7 @@ case 'view_post':
         <?php endif; ?>
         <hr>
 
-                <?php if (isset($_COOKIE['auth']) && $_COOKIE['auth'] === $expected_auth_value): ?>
+                <?php if (isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
                     
                 <?php endif; ?>
             </tr>
